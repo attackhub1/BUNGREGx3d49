@@ -1,4 +1,3 @@
-```bat
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
@@ -447,4 +446,3 @@ echo.
 
 timeout /t 3 /nobreak >nul
 exit /b 1
-```
