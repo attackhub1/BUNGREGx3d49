@@ -2,70 +2,47 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 chcp 65001 >nul
-title BUNGDUM x RUNIN ^| BANGDAM SHOP
+title BUNGDUM x RUNIN
 color 07
-mode con: cols=110 lines=48
+mode con: cols=78 lines=25
 
 if /I "%~1"=="SELECT_MENU" goto SELECT_MENU
 
+rem ============================================================
+rem MAIN LOADER
+rem ============================================================
+
 cls
 echo.
+echo  ================================================================
 echo.
-echo    ██████╗ ██╗   ██╗███╗   ██╗ ██████╗ ██████╗ ██╗   ██╗███╗   ███╗
-echo    ██╔══██╗██║   ██║████╗  ██║██╔════╝ ██╔══██╗██║   ██║████╗ ████║
-echo    ██████╔╝██║   ██║██╔██╗ ██║██║  ███╗██║  ██║██║   ██║██╔████╔██║
-echo    ██╔══██╗██║   ██║██║╚██╗██║██║   ██║██║  ██║██║   ██║██║╚██╔╝██║
-echo    ██████╔╝╚██████╔╝██║ ╚████║╚██████╔╝██████╔╝╚██████╔╝██║ ╚═╝ ██║
-echo    ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝
+echo             BUNGDUM x RUNIN
+echo             B A N G D A M   S H O P
 echo.
+echo  ================================================================
 echo.
-echo                  ██████╗ ██╗   ██╗███╗   ██╗
-echo                  ██╔══██╗██║   ██║████╗  ██║
-echo                  ██████╔╝██║   ██║██╔██╗ ██║
-echo                  ██╔══██╗██║   ██║██║╚██╗██║
-echo                  ██████╔╝╚██████╔╝██║ ╚████║
-echo                  ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝
+echo             [01] Starting loader.............. OK
+echo             [02] Windows 10 / 11.............. OK
+echo             [03] System check................. OK
 echo.
-echo                 B A N G D A M   S H O P
-echo.
-echo        ============================================================
-echo                    BUNGDUM x RUNIN  ^|  LOADER
-echo        ============================================================
-echo.
-
 timeout /t 1 /nobreak >nul
-
-echo  [01] Starting loader............................ OK
-timeout /t 1 /nobreak >nul
-echo  [02] Checking Windows........................... OK
-timeout /t 1 /nobreak >nul
-echo  [03] Windows 10 / Windows 11 mode.............. OK
-timeout /t 1 /nobreak >nul
-echo  [04] Preparing configuration................... OK
-timeout /t 1 /nobreak >nul
-echo  [05] System ready............................... OK
-echo.
 
 :KEY
-
 cls
 echo.
-echo        ============================================================
-echo                           KEY SYSTEM
-echo        ============================================================
+echo  ================================================================
+echo                         KEY SYSTEM
+echo  ================================================================
 echo.
-echo             Enter your BangDam Shop license key
+echo       Enter BangDam Shop license key
 echo.
-echo             Key: 
 set "KEY="
-set /p "KEY="
+set /p "KEY=       KEY: "
 
 if /I "%KEY%"=="BUNGDUMxRUNIN-8ee9a3s" goto KEY_OK
 
 echo.
-echo             [X] INVALID KEY
-echo             [X] ACCESS DENIED
-echo.
+echo       [X] INVALID KEY
 timeout /t 2 /nobreak >nul
 goto KEY
 
@@ -74,34 +51,23 @@ goto KEY
 
 cls
 echo.
-echo        ============================================================
+echo  ================================================================
 echo                    BUNGDUM x RUNIN
-echo                         BANGDAM SHOP
-echo        ============================================================
+echo  ================================================================
 echo.
-echo             [OK] KEY ACCEPTED
-echo             [OK] ACCESS GRANTED
+echo       [OK] KEY ACCEPTED
+echo       [OK] ACCESS GRANTED
+echo.
+echo       Preparing gaming configuration...
 echo.
 timeout /t 1 /nobreak >nul
 
-echo             [01] Windows Check....................... OK
-echo             [02] Windows 10 / 11 Mode................. OK
-echo             [03] Gaming Configuration................ READY
-echo             [04] Game Mode Configuration.............. READY
-echo             [05] GPU Configuration................... READY
-echo             [06] Network Configuration................ READY
-echo             [07] Mouse Configuration.................. READY
-echo             [08] Emulator Detection................... READY
-echo.
+
+rem ============================================================
+rem CREATE REG
+rem ============================================================
 
 set "REGFILE=%TEMP%\BangDam_Gaming.reg"
-
-echo        ============================================================
-echo                         GAMING REG CONFIG
-echo        ============================================================
-echo.
-
-echo  [REG] Creating temporary registry file...
 
 > "%REGFILE%" echo Windows Registry Editor Version 5.00
 >>"%REGFILE%" echo.
@@ -109,7 +75,6 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "SystemResponsiveness"=dword:00000000
 >>"%REGFILE%" echo "NetworkThrottlingIndex"=dword:ffffffff
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
 >>"%REGFILE%" echo "Affinity"=dword:00000000
 >>"%REGFILE%" echo "Background Only"="False"
@@ -119,7 +84,6 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "Scheduling Category"="High"
 >>"%REGFILE%" echo "SFIO Priority"="High"
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_CURRENT_USER\System\GameConfigStore]
 >>"%REGFILE%" echo "GameDVR_Enabled"=dword:00000000
 >>"%REGFILE%" echo "GameDVR_FSEBehaviorMode"=dword:00000002
@@ -127,44 +91,35 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "GameDVR_DXGIHonorUserFSEBehaviorMode"=dword:00000001
 >>"%REGFILE%" echo "GameDVR_EFSEFeatureFlags"=dword:00000000
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR]
 >>"%REGFILE%" echo "AppCaptureEnabled"=dword:00000000
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
 >>"%REGFILE%" echo "Win32PrioritySeparation"=dword:00000026
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
 >>"%REGFILE%" echo "HwSchMode"=dword:00000002
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling]
 >>"%REGFILE%" echo "PowerThrottlingOff"=dword:00000001
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config]
 >>"%REGFILE%" echo "DODownloadMode"=dword:00000000
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters]
 >>"%REGFILE%" echo "Tcp1323Opts"=dword:00000001
 >>"%REGFILE%" echo "MaxUserPort"=dword:0000fffe
 >>"%REGFILE%" echo "TcpTimedWaitDelay"=dword:0000001e
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
 >>"%REGFILE%" echo "SubscribedContent-338389Enabled"=dword:00000000
 >>"%REGFILE%" echo "SubscribedContent-353694Enabled"=dword:00000000
 >>"%REGFILE%" echo "SubscribedContent-353696Enabled"=dword:00000000
 >>"%REGFILE%" echo "SystemPaneSuggestionsEnabled"=dword:00000000
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_CURRENT_USER\Control Panel\Desktop]
 >>"%REGFILE%" echo "MenuShowDelay"="0"
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_CURRENT_USER\Control Panel\Mouse]
 >>"%REGFILE%" echo "ActiveWindowTracking"=dword:00000000
 >>"%REGFILE%" echo "Beep"="No"
@@ -178,7 +133,6 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "SnapToDefaultButton"="0"
 >>"%REGFILE%" echo "SwapMouseButtons"="0"
 >>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
 >>"%REGFILE%" echo "AutoRepeatDelay"="1000"
 >>"%REGFILE%" echo "AutoRepeatRate"="500"
@@ -186,48 +140,87 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "DelayBeforeAcceptance"="1000"
 >>"%REGFILE%" echo "Flags"="126"
 
-echo  [OK] Registry file created.
-echo.
-echo  [REG] Applying configuration...
 
+rem ============================================================
+rem APPLY REG
+rem ============================================================
+
+cls
+echo.
+echo  ================================================================
+echo                    APPLYING CONFIGURATION
+echo  ================================================================
+echo.
+echo       [01] Registry......................... APPLYING
 reg.exe import "%REGFILE%" >nul 2>&1
 
 if errorlevel 1 (
-    echo  [X] Registry import failed.
-    echo  [INFO] Run this BAT as Administrator.
+    echo       [X] Registry import failed
 ) else (
-    echo  [OK] Registry applied successfully.
+    echo       [OK] Registry applied
 )
 
 del /f /q "%REGFILE%" >nul 2>&1
 
+echo       [02] Temporary files.................. REMOVED
+echo       [03] Gaming configuration............. READY
 echo.
-echo  [OK] Temporary files removed.
-echo.
-echo        ============================================================
-echo                         CONFIGURATION DONE
-echo        ============================================================
-echo.
+timeout /t 1 /nobreak >nul
+
+
+rem ============================================================
+rem GET POWERSHELL PARENT PID
+rem ============================================================
+
+set "PARENT_PID="
+set "PARENT_NAME="
+
+for /f "tokens=1,2" %%A in ('powershell -NoProfile -Command "$p=Get-CimInstance Win32_Process -Filter \"ProcessId=$PID\"; $x=Get-CimInstance Win32_Process -Filter \"ProcessId=$($p.ParentProcessId)\"; Write-Output \"$($x.ProcessId) $($x.Name)\"" 2^>nul') do (
+    set "PARENT_PID=%%A"
+    set "PARENT_NAME=%%B"
+)
+
+rem ============================================================
+rem OPEN NEW CMD MENU
+rem ============================================================
+
+start "" "%ComSpec%" /c ""%~f0" SELECT_MENU"
 
 timeout /t 1 /nobreak >nul
 
-rem เปิด CMD ใหม่สำหรับหน้าเลือก แล้วปิดตัวหลักทันที
-start "" cmd /c ""%~f0" SELECT_MENU"
+rem ============================================================
+rem CLOSE POWERSHELL PARENT ONLY
+rem ============================================================
+
+if /I "%PARENT_NAME%"=="powershell.exe" (
+    taskkill /PID %PARENT_PID% /F >nul 2>&1
+    exit
+)
+
+if /I "%PARENT_NAME%"=="pwsh.exe" (
+    taskkill /PID %PARENT_PID% /F >nul 2>&1
+    exit
+)
+
 exit
 
+
+rem ============================================================
+rem SELECT MENU
+rem ============================================================
 
 :SELECT_MENU
 
 chcp 65001 >nul
-title BUNGDUM x RUNIN ^| SELECT EMULATOR
+title BUNGDUM x RUNIN
 color 07
-mode con: cols=100 lines=32
+mode con: cols=78 lines=25
 
-rem =========================
+rem ============================================================
 rem RAINBOW LOOP
-rem =========================
+rem ============================================================
 
-for /L %%R in (1,1,8) do (
+for /L %%R in (1,1,6) do (
     cls
 
     if %%R==1 color 0C
@@ -235,62 +228,52 @@ for /L %%R in (1,1,8) do (
     if %%R==3 color 0E
     if %%R==4 color 0A
     if %%R==5 color 0B
-    if %%R==6 color 09
-    if %%R==7 color 05
-    if %%R==8 color 0D
+    if %%R==6 color 0D
 
     echo.
+    echo  ================================================================
     echo.
-    echo        ============================================================
+    echo              BUNGDUM x RUNIN
+    echo              B A N G D A M   S H O P
     echo.
-    echo                     B U N G D U M   x   R U N I N
+    echo              SYSTEM READY
     echo.
-    echo                       B A N G D A M   S H O P
+    echo              LOADING EMULATOR MENU...
     echo.
-    echo        ============================================================
-    echo.
-    echo                         SYSTEM READY
-    echo.
-    echo                         LOADING...
-    echo.
-    echo        ============================================================
+    echo  ================================================================
     echo.
 
     timeout /t 1 /nobreak >nul
 )
 
-rem =========================
-rem SELECT MENU
-rem =========================
+rem ============================================================
+rem MENU
+rem ============================================================
 
 color 07
 cls
 
 echo.
+echo  ================================================================
 echo.
-echo        ============================================================
+echo                    BUNGDUM x RUNIN
+echo                    BANGDAM SHOP
 echo.
-echo                         BUNGDUM x RUNIN
-echo                           BANGDAM SHOP
+echo  ================================================================
 echo.
-echo        ============================================================
+echo                    SELECT EMULATOR
 echo.
+echo                    [1] BlueStacks
 echo.
-echo                         SELECT EMULATOR
+echo                    [2] BlueStacks MSI
 echo.
+echo                    [0] Exit
 echo.
-echo                       [1]  BlueStacks
-echo.
-echo                       [2]  BlueStacks MSI
-echo.
-echo                       [0]  Exit
-echo.
-echo.
-echo        ============================================================
+echo  ================================================================
 echo.
 
 set "CHOICE="
-set /p "CHOICE=             Select [0-2]: "
+set /p "CHOICE=             Select: "
 
 if "%CHOICE%"=="1" goto BLUESTACKS
 if "%CHOICE%"=="2" goto MSI
@@ -299,16 +282,11 @@ if "%CHOICE%"=="0" exit
 goto SELECT_MENU
 
 
-:BLUESTACKS
+rem ============================================================
+rem BLUESTACKS
+rem ============================================================
 
-cls
-echo.
-echo        ============================================================
-echo                           BLUESTACKS
-echo        ============================================================
-echo.
-echo             [SCAN] Searching for HD-Player.exe...
-echo.
+:BLUESTACKS
 
 set "PLAYER="
 
@@ -322,16 +300,11 @@ if not defined PLAYER goto NOTFOUND
 goto LAUNCH
 
 
-:MSI
+rem ============================================================
+rem BLUESTACKS MSI
+rem ============================================================
 
-cls
-echo.
-echo        ============================================================
-echo                        BLUESTACKS MSI
-echo        ============================================================
-echo.
-echo             [SCAN] Searching for HD-Player.exe...
-echo.
+:MSI
 
 set "PLAYER="
 
@@ -345,42 +318,46 @@ if not defined PLAYER goto NOTFOUND
 goto LAUNCH
 
 
+rem ============================================================
+rem LAUNCH
+rem ============================================================
+
 :LAUNCH
 
 cls
 echo.
-echo        ============================================================
+echo  ================================================================
 echo.
-echo                     EMULATOR FOUND
+echo                    STARTING EMULATOR
 echo.
-echo             [OK] Starting emulator...
+echo                    [OK] %PLAYER%
 echo.
-echo        ============================================================
+echo  ================================================================
 echo.
 
 start "" "%PLAYER%"
 
-rem รอแค่ให้คำสั่งเปิด Emulator ถูกส่งออกไป
 timeout /t 2 /nobreak >nul
 
-rem ปิด CMD อัตโนมัติ
 exit
 
+
+rem ============================================================
+rem NOT FOUND
+rem ============================================================
 
 :NOTFOUND
 
 cls
 echo.
-echo        ============================================================
+echo  ================================================================
 echo.
-echo                         EMULATOR NOT FOUND
+echo                    EMULATOR NOT FOUND
 echo.
-echo             [X] BlueStacks installation not found.
+echo              BlueStacks installation not found.
 echo.
-echo        ============================================================
+echo  ================================================================
 echo.
 
-timeout /t 3 /nobreak >nul
-
-rem ปิด CMD อัตโนมัติ
+timeout /t 2 /nobreak >nul
 exit
