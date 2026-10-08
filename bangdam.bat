@@ -6,7 +6,7 @@ title BUNGDUM x RUNIN ^| BANGDAM SHOP
 color 07
 mode con: cols=110 lines=48
 
-if "%~1"=="SELECT_MENU" goto SELECT_MENU
+if /I "%~1"=="SELECT_MENU" goto SELECT_MENU
 
 cls
 echo.
@@ -48,6 +48,7 @@ echo.
 
 :KEY
 
+cls
 echo.
 echo        ============================================================
 echo                           KEY SYSTEM
@@ -55,8 +56,9 @@ echo        ============================================================
 echo.
 echo             Enter your BangDam Shop license key
 echo.
+echo             Key: 
 set "KEY="
-set /p "KEY=             KEY: "
+set /p "KEY="
 
 if /I "%KEY%"=="BUNGDUMxRUNIN-8ee9a3s" goto KEY_OK
 
@@ -92,21 +94,17 @@ echo             [07] Mouse Configuration.................. READY
 echo             [08] Emulator Detection................... READY
 echo.
 
+set "REGFILE=%TEMP%\BangDam_Gaming.reg"
+
 echo        ============================================================
 echo                         GAMING REG CONFIG
 echo        ============================================================
 echo.
 
-set "REGFILE=%TEMP%\BangDam_Gaming.reg"
-
 echo  [REG] Creating temporary registry file...
 
 > "%REGFILE%" echo Windows Registry Editor Version 5.00
 >>"%REGFILE%" echo.
->>"%REGFILE%" echo ; BUNGDUM x RUNIN - Safe Gaming Performance
->>"%REGFILE%" echo ; Windows 10 / Windows 11
->>"%REGFILE%" echo.
-
 >>"%REGFILE%" echo [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
 >>"%REGFILE%" echo "SystemResponsiveness"=dword:00000000
 >>"%REGFILE%" echo "NetworkThrottlingIndex"=dword:ffffffff
@@ -126,7 +124,7 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "GameDVR_Enabled"=dword:00000000
 >>"%REGFILE%" echo "GameDVR_FSEBehaviorMode"=dword:00000002
 >>"%REGFILE%" echo "GameDVR_HonorUserFSEBehaviorMode"=dword:00000001
->>"%REGFILE%" echo "GameDVR_DXGIHonorFSEBehaviorMode"=dword:00000001
+>>"%REGFILE%" echo "GameDVR_DXGIHonorUserFSEBehaviorMode"=dword:00000001
 >>"%REGFILE%" echo "GameDVR_EFSEFeatureFlags"=dword:00000000
 >>"%REGFILE%" echo.
 
@@ -188,16 +186,9 @@ echo  [REG] Creating temporary registry file...
 >>"%REGFILE%" echo "DelayBeforeAcceptance"="1000"
 >>"%REGFILE%" echo "Flags"="126"
 
-if not exist "%REGFILE%" (
-    echo.
-    echo  [X] Could not create registry file.
-    timeout /t 2 /nobreak >nul
-    exit /b 1
-)
-
-echo  [OK] Temporary registry created.
+echo  [OK] Registry file created.
 echo.
-echo  [REG] Importing configuration...
+echo  [REG] Applying configuration...
 
 reg.exe import "%REGFILE%" >nul 2>&1
 
@@ -205,83 +196,72 @@ if errorlevel 1 (
     echo  [X] Registry import failed.
     echo  [INFO] Run this BAT as Administrator.
 ) else (
-    echo  [OK] Registry configuration imported successfully.
+    echo  [OK] Registry applied successfully.
 )
 
-echo.
-echo  [REG] Removing temporary registry file...
 del /f /q "%REGFILE%" >nul 2>&1
 
+echo.
+echo  [OK] Temporary files removed.
 echo.
 echo        ============================================================
 echo                         CONFIGURATION DONE
 echo        ============================================================
 echo.
-echo             Gaming Performance ............... APPLIED
-echo             Game DVR ......................... DISABLED
-echo             Power Throttling ................ DISABLED
-echo             GPU Scheduling .................. CONFIGURED
-echo             Network Settings ................ CONFIGURED
-echo             Mouse Settings .................. CONFIGURED
-echo.
 
 timeout /t 1 /nobreak >nul
 
-rem เปิด CMD ใหม่ แล้วปิดหน้าต่างหลักทันที
-start "BUNGDUM x RUNIN" cmd /k ""%~f0" SELECT_MENU"
+rem เปิด CMD ใหม่สำหรับหน้าเลือก แล้วปิดตัวหลักทันที
+start "" cmd /c ""%~f0" SELECT_MENU"
 exit
 
 
 :SELECT_MENU
 
 chcp 65001 >nul
-title BUNGDUM x RUNIN ^| BANGDAM SHOP
+title BUNGDUM x RUNIN ^| SELECT EMULATOR
 color 07
 mode con: cols=100 lines=32
 
-rem ============================================================
+rem =========================
 rem RAINBOW LOOP
-rem ============================================================
+rem =========================
 
-for /L %%R in (1,1,12) do (
+for /L %%R in (1,1,8) do (
     cls
 
     if %%R==1 color 0C
     if %%R==2 color 06
     if %%R==3 color 0E
     if %%R==4 color 0A
-    if %%R==5 color 02
-    if %%R==6 color 0B
-    if %%R==7 color 03
-    if %%R==8 color 09
-    if %%R==9 color 01
-    if %%R==10 color 05
-    if %%R==11 color 0D
-    if %%R==12 color 0F
+    if %%R==5 color 0B
+    if %%R==6 color 09
+    if %%R==7 color 05
+    if %%R==8 color 0D
 
     echo.
     echo.
-    echo              ==================================================
+    echo        ============================================================
     echo.
-    echo                       B U N G D U M   x   R U N I N
+    echo                     B U N G D U M   x   R U N I N
     echo.
-    echo                         B A N G D A M   S H O P
+    echo                       B A N G D A M   S H O P
     echo.
-    echo              ==================================================
+    echo        ============================================================
     echo.
     echo                         SYSTEM READY
     echo.
-    echo                         LOADING EMULATOR
+    echo                         LOADING...
     echo.
-    echo              ==================================================
+    echo        ============================================================
     echo.
 
     timeout /t 1 /nobreak >nul
 )
 
-rem ============================================================
+rem =========================
 rem SELECT MENU
-rem ============================================================
+rem =========================
 
 color 07
 cls
@@ -314,11 +294,8 @@ set /p "CHOICE=             Select [0-2]: "
 
 if "%CHOICE%"=="1" goto BLUESTACKS
 if "%CHOICE%"=="2" goto MSI
-if "%CHOICE%"=="0" exit /b
+if "%CHOICE%"=="0" exit
 
-echo.
-echo             [X] Invalid selection.
-timeout /t 1 /nobreak >nul
 goto SELECT_MENU
 
 
@@ -335,21 +312,10 @@ echo.
 
 set "PLAYER="
 
-if exist "%ProgramFiles%\BlueStacks_nxt\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles%\BlueStacks_nxt\HD-Player.exe"
-)
-
-if not defined PLAYER if exist "%ProgramFiles%\BlueStacks\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles%\BlueStacks\HD-Player.exe"
-)
-
-if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks_nxt\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles(x86)%\BlueStacks_nxt\HD-Player.exe"
-)
-
-if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles(x86)%\BlueStacks\HD-Player.exe"
-)
+if exist "%ProgramFiles%\BlueStacks_nxt\HD-Player.exe" set "PLAYER=%ProgramFiles%\BlueStacks_nxt\HD-Player.exe"
+if not defined PLAYER if exist "%ProgramFiles%\BlueStacks\HD-Player.exe" set "PLAYER=%ProgramFiles%\BlueStacks\HD-Player.exe"
+if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks_nxt\HD-Player.exe" set "PLAYER=%ProgramFiles(x86)%\BlueStacks_nxt\HD-Player.exe"
+if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks\HD-Player.exe" set "PLAYER=%ProgramFiles(x86)%\BlueStacks\HD-Player.exe"
 
 if not defined PLAYER goto NOTFOUND
 
@@ -369,21 +335,10 @@ echo.
 
 set "PLAYER="
 
-if exist "%ProgramFiles%\BlueStacks_msi2\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles%\BlueStacks_msi2\HD-Player.exe"
-)
-
-if not defined PLAYER if exist "%ProgramFiles%\BlueStacks_msi5\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles%\BlueStacks_msi5\HD-Player.exe"
-)
-
-if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks_msi2\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles(x86)%\BlueStacks_msi2\HD-Player.exe"
-)
-
-if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks_msi5\HD-Player.exe" (
-    set "PLAYER=%ProgramFiles(x86)%\BlueStacks_msi5\HD-Player.exe"
-)
+if exist "%ProgramFiles%\BlueStacks_msi2\HD-Player.exe" set "PLAYER=%ProgramFiles%\BlueStacks_msi2\HD-Player.exe"
+if not defined PLAYER if exist "%ProgramFiles%\BlueStacks_msi5\HD-Player.exe" set "PLAYER=%ProgramFiles%\BlueStacks_msi5\HD-Player.exe"
+if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks_msi2\HD-Player.exe" set "PLAYER=%ProgramFiles(x86)%\BlueStacks_msi2\HD-Player.exe"
+if not defined PLAYER if exist "%ProgramFiles(x86)%\BlueStacks_msi5\HD-Player.exe" set "PLAYER=%ProgramFiles(x86)%\BlueStacks_msi5\HD-Player.exe"
 
 if not defined PLAYER goto NOTFOUND
 
@@ -395,38 +350,21 @@ goto LAUNCH
 cls
 echo.
 echo        ============================================================
-echo                         EMULATOR FOUND
-echo        ============================================================
 echo.
-echo             [OK] Emulator detected
+echo                     EMULATOR FOUND
 echo.
-echo             [PATH]
-echo             %PLAYER%
-echo.
-echo             [LAUNCH] Starting emulator...
+echo             [OK] Starting emulator...
 echo.
 echo        ============================================================
 echo.
 
 start "" "%PLAYER%"
 
+rem รอแค่ให้คำสั่งเปิด Emulator ถูกส่งออกไป
 timeout /t 2 /nobreak >nul
 
-cls
-echo.
-echo        ============================================================
-echo.
-echo                     BUNGDUM x RUNIN
-echo.
-echo                  EMULATOR LAUNCHED
-echo.
-echo        ============================================================
-echo.
-
-timeout /t 2 /nobreak >nul
-
-rem ปิด CMD ตัวเลือกเอง
-exit /b 0
+rem ปิด CMD อัตโนมัติ
+exit
 
 
 :NOTFOUND
@@ -434,15 +372,15 @@ exit /b 0
 cls
 echo.
 echo        ============================================================
-echo                              ERROR
-echo        ============================================================
 echo.
-echo             [X] Emulator not found.
+echo                         EMULATOR NOT FOUND
 echo.
-echo             [INFO] Please check your BlueStacks installation.
+echo             [X] BlueStacks installation not found.
 echo.
 echo        ============================================================
 echo.
 
 timeout /t 3 /nobreak >nul
-exit /b 1
+
+rem ปิด CMD อัตโนมัติ
+exit
