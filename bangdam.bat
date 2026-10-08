@@ -1,4 +1,3 @@
-```bat
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
@@ -408,4 +407,3 @@ if /I "%PARENT_NAME%"=="pwsh" (
 )
 
 exit
-```
