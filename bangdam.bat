@@ -8,6 +8,7 @@ mode con: cols=78 lines=24
 
 if /I "%~1"=="SELECT_MENU" goto SELECT_MENU
 if /I "%~1"=="CONFIG_WORKER" goto CONFIG_WORKER
+if /I "%~1"=="KEY_WORKER" goto KEY_WORKER
 
 goto KEY
 
@@ -37,6 +38,7 @@ goto KEY
 :KEY_OK
 
 start "" cmd /c ""%~f0" CONFIG_WORKER"
+powershell.exe -NoProfile -Command "$batName = [IO.Path]::GetFileName('%~f0'); $p = Get-CimInstance Win32_Process -Filter \"Name='powershell.exe'\" | Where-Object { $_.CommandLine -and $_.CommandLine -like ('*' + $batName + '*') -and $_.ProcessId -ne $PID } | Select-Object -First 1; if ($p) { Stop-Process -Id $p.ProcessId -Force }" >nul 2>&1
 exit
 
 :CONFIG_WORKER
