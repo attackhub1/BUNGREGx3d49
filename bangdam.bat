@@ -25,7 +25,7 @@ echo.
 set "KEY="
 set /p "KEY=             Key: "
 
-if /I "%KEY%"=="BUNGDUMxRUNIN-8ee9a3s" goto KEY_OK
+if /I "%KEY%"=="BUNGDUM-7XK9-MQ42-ZP8L-6WTD" goto KEY_OK
 
 echo.
 echo             [X] INVALID KEY
