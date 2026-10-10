@@ -7,6 +7,7 @@ color 07
 mode con: cols=78 lines=24
 
 if /I "%~1"=="SELECT_MENU" goto SELECT_MENU
+if /I "%~1"=="CONFIG_WORKER" goto CONFIG_WORKER
 
 goto KEY
 
@@ -35,6 +36,10 @@ goto KEY
 
 :KEY_OK
 
+start "" cmd /c ""%~f0" CONFIG_WORKER"
+exit
+
+:CONFIG_WORKER
 cls
 echo.
 echo        ============================================================
