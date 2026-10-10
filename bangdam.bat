@@ -4,47 +4,11 @@ setlocal EnableExtensions EnableDelayedExpansion
 chcp 65001 >nul
 title BUNGDUM x RUNIN ^| BANGDAM SHOP
 color 07
-mode con: cols=110 lines=48
+mode con: cols=78 lines=24
 
 if /I "%~1"=="SELECT_MENU" goto SELECT_MENU
 
-cls
-echo.
-echo.
-echo    ██████╗ ██╗   ██╗███╗   ██╗ ██████╗ ██████╗ ██╗   ██╗███╗   ███╗
-echo    ██╔══██╗██║   ██║████╗  ██║██╔════╝ ██╔══██╗██║   ██║████╗ ████║
-echo    ██████╔╝██║   ██║██╔██╗ ██║██║  ███╗██║  ██║██║   ██║██╔████╔██║
-echo    ██╔══██╗██║   ██║██║╚██╗██║██║   ██║██║  ██║██║   ██║██║╚██╔╝██║
-echo    ██████╔╝╚██████╔╝██║ ╚████║╚██████╔╝██████╔╝╚██████╔╝██║ ╚═╝ ██║
-echo    ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝     ╚═╝
-echo.
-echo.
-echo                  ██████╗ ██╗   ██╗███╗   ██╗
-echo                  ██╔══██╗██║   ██║████╗  ██║
-echo                  ██████╔╝██║   ██║██╔██╗ ██║
-echo                  ██╔══██╗██║   ██║██║╚██╗██║
-echo                  ██████╔╝╚██████╔╝██║ ╚████║
-echo                  ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝
-echo.
-echo                 B A N G D A M   S H O P
-echo.
-echo        ============================================================
-echo                    BUNGDUM x RUNIN  ^|  LOADER
-echo        ============================================================
-echo.
-
-timeout /t 1 /nobreak >nul
-
-echo  [01] Starting loader............................ OK
-timeout /t 1 /nobreak >nul
-echo  [02] Checking Windows........................... OK
-timeout /t 1 /nobreak >nul
-echo  [03] Windows 10 / Windows 11 mode.............. OK
-timeout /t 1 /nobreak >nul
-echo  [04] Preparing configuration................... OK
-timeout /t 1 /nobreak >nul
-echo  [05] System ready............................... OK
-echo.
+goto KEY
 
 :KEY
 
@@ -56,9 +20,8 @@ echo        ============================================================
 echo.
 echo             Enter your BangDam Shop license key
 echo.
-echo             Key:
 set "KEY="
-set /p "KEY="
+set /p "KEY=             Key: "
 
 if /I "%KEY%"=="BUNGDUMxRUNIN-8ee9a3s" goto KEY_OK
 
@@ -221,43 +184,7 @@ exit
 chcp 65001 >nul
 title BUNGDUM x RUNIN ^| SELECT EMULATOR
 color 07
-mode con: cols=100 lines=32
-
-rem ============================================================
-rem RAINBOW LOOP
-rem ============================================================
-
-for /L %%R in (1,1,8) do (
-    cls
-
-    if %%R==1 color 0C
-    if %%R==2 color 06
-    if %%R==3 color 0E
-    if %%R==4 color 0A
-    if %%R==5 color 0B
-    if %%R==6 color 09
-    if %%R==7 color 05
-    if %%R==8 color 0D
-
-    echo.
-    echo.
-    echo        ============================================================
-    echo.
-    echo                     B U N G D U M   x   R U N I N
-    echo.
-    echo                       B A N G D A M   S H O P
-    echo.
-    echo        ============================================================
-    echo.
-    echo                         SYSTEM READY
-    echo.
-    echo                         LOADING...
-    echo.
-    echo        ============================================================
-    echo.
-
-    timeout /t 1 /nobreak >nul
-)
+mode con: cols=78 lines=24
 
 color 07
 cls
